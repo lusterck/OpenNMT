@@ -1,0 +1,30 @@
+[2017-10-11:09:53:31:INFO:sockeye.utils:log_sockeye_version] Sockeye version 1.7.1 commit a205e4471127ed4d0fd13e3a7ae9b2005a44d90a
+[2017-10-11:09:53:31:INFO:sockeye.utils:log_mxnet_version] MXNet version 0.10.0
+[2017-10-11:09:53:31:INFO:sockeye.utils:log_basic_info] Command: /usr/local/lib/python3.5/dist-packages/sockeye/train.py --source data/train.spacy.filter.en --target data/train.spacy.filter.fr --validation-source data/dev.spacy.filter.en --validation-target data/dev.spacy.filter.fr --output sockeye
+[2017-10-11:09:53:31:INFO:sockeye.utils:log_basic_info] Arguments: Namespace(attention_coverage_num_hidden=1, attention_coverage_type='count', attention_in_upper_layers=False, attention_mhdot_heads=None, attention_num_hidden=None, attention_type='mlp', attention_use_prev_word=False, batch_size=64, batch_type='sentence', bucket_width=10, checkpoint_frequency=1000, clip_gradient=1.0, conv_embed_add_positional_encodings=False, conv_embed_dropout=0.0, conv_embed_max_filter_width=8, conv_embed_num_filters=(200, 200, 250, 250, 300, 300, 300, 300), conv_embed_num_highway_layers=4, conv_embed_output_dim=None, conv_embed_pool_stride=5, decoder='rnn', device_ids=[-1], disable_device_locking=False, embed_dropout=(0.0, 0.0), encoder='rnn', fill_up='replicate', initial_learning_rate=0.0003, keep_last_params=-1, layer_normalization=False, learn_lexical_bias=False, learning_rate_half_life=10, learning_rate_reduce_factor=0.5, learning_rate_reduce_num_not_improved=3, learning_rate_schedule=None, learning_rate_scheduler_type='plateau-reduce', learning_rate_warmup=0, lexical_bias=None, lock_dir='/tmp', loss='cross-entropy', max_num_checkpoint_not_improved=8, max_seq_len=(100, 100), max_updates=-1, metrics=['perplexity'], min_num_epochs=0, momentum=None, monitor_bleu=0, monitor_pattern=None, monitor_stat_func='mx_default', no_bucketing=False, normalize_loss=False, num_embed=(512, 512), num_layers=(1, 1), num_words=(50000, 50000), optimized_metric='perplexity', optimizer='adam', output='sockeye', overwrite_output=False, params=None, quiet=False, rnn_cell_type='lstm', rnn_context_gating=False, rnn_decoder_hidden_dropout=0.0, rnn_decoder_state_init='last', rnn_dropout_inputs=(0.0, 0.0), rnn_dropout_recurrent=(0.0, 0.0), rnn_dropout_states=(0.0, 0.0), rnn_encoder_reverse_input=False, rnn_first_residual_layer=2, rnn_forget_bias=0.0, rnn_h2h_init='orthogonal', rnn_num_hidden=1024, rnn_residual_connections=False, seed=13, smoothed_cross_entropy_alpha=0.3, source='data/train.spacy.filter.en', source_vocab=None, target='data/train.spacy.filter.fr', target_vocab=None, transformer_attention_heads=8, transformer_dropout_attention=0.0, transformer_dropout_prepost=0.0, transformer_dropout_relu=0.0, transformer_feed_forward_num_hidden=2048, transformer_model_size=512, transformer_no_positional_encodings=False, transformer_postprocess=('drn', 'drn'), transformer_preprocess=('', ''), use_cpu=False, use_fused_rnn=False, use_tensorboard=False, validation_source='data/dev.spacy.filter.en', validation_target='data/dev.spacy.filter.fr', weight_decay=0.0, weight_init='xavier', weight_init_scale=0.04, weight_tying=False, weight_tying_type='trg_softmax', word_min_count=(1, 1))
+[2017-10-11:09:53:33:INFO:sockeye.utils:acquire_gpus] Attempting to acquire 1 GPUs of 2 GPUs. The requested devices are: [-1]
+[2017-10-11:09:53:33:INFO:sockeye.utils:__enter__] Acquired GPU 0.
+[2017-10-11:09:53:33:INFO:__main__:determine_context] Device(s): GPU [0]
+[2017-10-11:09:53:33:INFO:sockeye.vocab:build_from_paths] Building vocabulary from dataset(s): ['data/train.spacy.filter.en']
+[2017-10-11:09:53:33:INFO:sockeye.utils:__exit__] Releasing GPU 0.
+[2017-10-11:09:53:33:ERROR:__main__:exception_hook] UNCAUGHT EXCEPTION
+Traceback (most recent call last):
+  File "/usr/lib/python3.5/runpy.py", line 184, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/usr/lib/python3.5/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/train.py", line 619, in <module>
+    main()
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/train.py", line 561, in main
+    vocab_source, vocab_target = load_or_create_vocabs(args, resume_training, output_folder)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/train.py", line 196, in load_or_create_vocabs
+    num_words_source, word_min_count_source)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/train.py", line 65, in _build_or_load_vocab
+    min_count=word_min_count)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/vocab.py", line 47, in build_from_paths
+    return build_vocab(chain(*files), num_words, min_count)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/vocab.py", line 46, in <genexpr>
+    files = (stack.enter_context(smart_open(path)) for path in paths)
+  File "/usr/local/lib/python3.5/dist-packages/sockeye/data_io.py", line 266, in smart_open
+    return open(filename, mode=mode, encoding='utf-8', errors=errors)
+FileNotFoundError: [Errno 2] No such file or directory: 'data/train.spacy.filter.en'
