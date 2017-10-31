@@ -119,6 +119,12 @@ function tokenizerTest.bpebasic()
   end
 end
 
+function tokenizerTest.test_substitute()
+  local opt = cmd:parse({'-mode','conservative'})
+  testTok(opt, [[test￭ protect￨, ：, and ％ or ＃...]],
+               [[test ■ protect │ , : , and % or # . . .]], false)
+end
+
 function tokenizerTest.case_feature()
   local opt = cmd:parse({'-mode','conservative','-joiner_annotate', '-case_feature'})
   testTok(opt, [[test \\\\a Capitalized lowercased UPPERCASÉ miXêd - cyrillic-Б]],
@@ -138,6 +144,11 @@ function tokenizerTest.segment_alphabet()
   local tok = "有￭ 入￭ 聲￭ 嘅￭ 唐￭ 話￭ 往￭ 往￭ 有￭ 陽￭ 入￭ 對￭ 轉 ￭，￭ 即￭ 係￭ 入￭ 聲￭ 韻￭ 尾￭ 同￭ 鼻￭ 音￭ 韻￭ 尾￭ 可￭ 以￭ 轉￭ 化 ￭。￭ 比￭ "..
               "如￭ 粵￭ 語￭ 嘅 ￭「￭ 抌 ￭」 ￭（￭ dam ￭） ￭「￭ 揼 ￭」 ￭（￭ dap ￭） ￭，￭ 意￭ 思￭ 接￭ 近 ￭，￭ 意￭ 味￭ 微￭ 妙 ￭，￭ 區￭ 別￭ 在￭ 於-m同-p嘅￭ 轉￭ 換 ￭。"
   testTok(opt, raw, tok)
+end
+
+function tokenizerTest.segment_numbers()
+  local opt = cmd:parse({'-segment_numbers','-joiner_annotate','-mode','aggressive'})
+  testTok(opt, "1984 mille neuf cent quatrevingt-quatre", "1￭ 9￭ 8￭ 4 mille neuf cent quatrevingt ￭-￭ quatre", true)
 end
 
 function tokenizerTest.segment_alphabet_change()
